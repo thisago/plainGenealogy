@@ -1,10 +1,18 @@
-# yaml-language-server: $schema=https://json-schema.org/draft-schema/07
+# yaml-language-server: $schema=https://json-schema.org/draft-07/schema
 ---
+available_persons_ids:
+  &available_person_ids [
+    alex_smith_1998,
+    ben_smith_2005,
+    john_smith_1970,
+    mary_jones_1972,
+    sam_adopter_1980,
+    sara_lee_1975,
+  ]
 definitions:
-  available_persons_ids: &available_person_ids []
   date: &date
     type: string
-    pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}(T[0-9]{2}:[0-9]{2}:[0-9]{2})?$"
+    pattern: "^[0-9]{4}(-[0-9]{2}-[0-9]{2})?(T[0-9]{2}:[0-9]{2}:[0-9]{2})?$"
   notes: &notes
     type: array
     items:
@@ -24,88 +32,92 @@ properties:
     enum: [1]
   persons:
     type: object
-    required:
-      - name
-    properties:
-      name:
-        type: object
-        required: [given, family]
-        properties:
-          given:
-            type: string
-          family:
-            type: string
-      gender:
-        type: string
-        enum: [male, female, nonbinary, unknown]
-      birth:
-        type: object
-        properties:
-          date: *date
-          place: *place
-      death:
-        type: object
-        properties:
-          date: *date
-          place: *place
-      aka:
-        type: array
-        items:
-          type: string
-      notes: *notes
-      refs:
-        type: array
-        description: |
-          External references connecting this person record to entries in other systems, registries, or files (e.g. GEDCOM IDs, government databases, other genealogy platforms).
-          This enables robust cross-referencing, auditability, and potential merging/importing of records from different sources.
-        items:
+    additionalProperties:
+      type: object
+      required: [name]
+      properties:
+        name:
           type: object
-          required: [type, id]
+          required: [given, family]
           properties:
-            type:
+            given:
               type: string
-            id:
+            family:
               type: string
-  unions:
-    type: object
-    required:
-      - partners
-    properties:
-      partners:
-        type: array
-        minItems: 2
-        maxItems: 2
-        items:
+        gender:
           type: string
-          enum: *available_person_ids
-      type:
-        type: string
-        enum: [marriage, partnership, unknown]
-      start:
-        type: object
-        properties:
-          date: *date
-          place: *place
-      end:
-        type: object
-        properties:
-          date: *date
-          reason:
+          enum: [male, female, nonbinary, unknown]
+        birth:
+          type: object
+          properties:
+            date: *date
+            place: *place
+        death:
+          type: object
+          properties:
+            date: *date
+            place: *place
+        aka:
+          type: array
+          items:
             type: string
-      children:
-        type: array
-        items:
-          - type: object
-            required: [id]
+        notes: *notes
+        refs:
+          type: array
+          description: |
+            External references connecting this person record to entries in other systems, registries, or files (e.g. GEDCOM IDs, government databases, other genealogy platforms).
+            This enables robust cross-referencing, auditability, and potential merging/importing of records from different sources.
+          items:
+            type: object
+            required: [type, id]
             properties:
+              type:
+                type: string
               id:
                 type: string
-                enum: *available_person_ids
-              relation:
-                type: string
-                enum: [biological, adopted, step, guardian, unknown]
-                default: biological
-              order:
-                type: integer
-                minimum: 1
-      notes: *notes
+
+  unions:
+    type: object
+    additionalProperties:
+      type: object
+      required:
+        - partners
+      properties:
+        partners:
+          type: array
+          minItems: 2
+          maxItems: 2
+          items:
+            type: string
+            enum: *available_person_ids
+        type:
+          type: string
+          enum: [marriage, partnership, unknown]
+        start:
+          type: object
+          properties:
+            date: *date
+            place: *place
+        end:
+          type: object
+          properties:
+            date: *date
+            reason:
+              type: string
+        children:
+          type: array
+          items:
+            - type: object
+              required: [id]
+              properties:
+                id:
+                  type: string
+                  enum: *available_person_ids
+                relation:
+                  type: string
+                  enum: [biological, adopted, step, guardian, unknown]
+                  default: biological
+                order:
+                  type: integer
+                  minimum: 1
+        notes: *notes

@@ -9,7 +9,4 @@ ANCHOR=dynamic_PERSON_IDS
 
 .PHONY: update-persons-enum
 update-persons-enum:
-	ENUM_LIST=$$(yq '.persons | keys | unique | sort' genealogy.yaml); \
-	echo "$$ENUM_LIST"; \
-	yq -i ".definitions.available_persons_ids = $$ENUM_LIST" schema.yaml; \
-	yq -i ".definitions.available_persons_ids style=\"flow\"" schema.yaml
+	yq -i 'del(.available_persons_ids[]) | .available_persons_ids += (load("$(DATA)") | .persons | keys | unique | sort) | .available_persons_ids style="flow"' $(SCHEMA)
