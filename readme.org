@@ -1,5 +1,7 @@
 #+title: Plain Text Family Genealogy Structure
 
+Quick thing made with LLM, expect bullshit
+
 * Usage
 1. Add =.persons=
 2. Run src_bash[:exports code]{make}
