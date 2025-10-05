@@ -9,4 +9,4 @@ Quick thing made with LLM, expect bullshit
    make
    #+end_src
 3. Restart LSP server
-[[./editorWithLspServer.svg]]
+[[https://raw.githubusercontent.com/thisago/plainGenealogy/master/editorWithLspServer.svg][./editorWithLspServer.svg]]
