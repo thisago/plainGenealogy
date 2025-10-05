@@ -5,8 +5,8 @@ DATA=genealogy.yaml
 SCHEMA=schema.yaml
 
 # The anchor key (must exist in schema)
-ANCHOR=dynamic_PERSON_IDS
+ANCHOR=.available_persons_ids
 
 .PHONY: update-persons-enum
 update-persons-enum:
-	yq -i 'del(.available_persons_ids[]) | .available_persons_ids += (load("$(DATA)") | .persons | keys | unique | sort) | .available_persons_ids style="flow"' $(SCHEMA)
+	yq -i 'del($(ANCHOR)[]) | $(ANCHOR) += (load("$(DATA)") | .persons | keys | unique | sort)' $(SCHEMA)

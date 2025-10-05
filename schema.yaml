@@ -1,14 +1,12 @@
 # yaml-language-server: $schema=https://json-schema.org/draft-07/schema
 ---
-available_persons_ids:
-  &available_person_ids [
-    alex_smith_1998,
-    ben_smith_2005,
-    john_smith_1970,
-    mary_jones_1972,
-    sam_adopter_1980,
-    sara_lee_1975,
-  ]
+available_persons_ids: &available_person_ids
+  - alex_smith_1998
+  - ben_smith_2005
+  - john_smith_1970
+  - mary_jones_1972
+  - sam_adopter_1980
+  - sara_lee_1975
 definitions:
   date: &date
     type: string
@@ -75,7 +73,6 @@ properties:
                 type: string
               id:
                 type: string
-
   unions:
     type: object
     additionalProperties:
