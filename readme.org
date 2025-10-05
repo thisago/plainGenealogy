@@ -6,7 +6,7 @@ Quick thing made with LLM, expect bullshit
 1. Add =.persons=
 2. Run
    #+begin_src bash
-make
+   make
    #+end_src
 3. Restart LSP server
 [[./editorWithLspServer.svg]]
