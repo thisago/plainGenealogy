@@ -4,6 +4,9 @@ Quick thing made with LLM, expect bullshit
 
 * Usage
 1. Add =.persons=
-2. Run src_bash[:exports code]{make}
+2. Run
+   #+begin_src bash
+make
+   #+end_src
 3. Restart LSP server
 [[./editorWithLspServer.svg]]
