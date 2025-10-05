@@ -1,1 +1,87 @@
 # yaml-language-server: $schema=./schema.yaml
+---
+version: 1
+persons:
+  john_smith_1970:
+    name:
+      given: "John"
+      family: "Smith"
+    gender: "male"
+    birth:
+      date: "1970-05-12"
+      place: "Springfield"
+    death: null
+    aka: ["Johnny"]
+    notes: ["Loves sailing."]
+    refs:
+      - type: "GEDCOM"
+        id: "I1234"
+  mary_jones_1972:
+    name:
+      given: "Mary"
+      family: "Jones"
+    gender: "female"
+    birth:
+      date: "1972-08-01"
+    notes: ["Remarried after divorce."]
+  sara_lee_1975:
+    name:
+      given: "Sara"
+      family: "Lee"
+    gender: "female"
+    birth:
+      date: "1975-11-09"
+  alex_smith_1998:
+    name:
+      given: "Alex"
+      family: "Smith"
+    gender: "nonbinary"
+    birth:
+      date: "1998-03-22"
+  ben_smith_2005:
+    name:
+      given: "Ben"
+      family: "Smith"
+    gender: "male"
+    birth:
+      date: "2005-01-02"
+    notes: ["Adopted by John and Sara."]
+  sam_adopter_1980:
+    name:
+      given: "Sam"
+      family: "Adopter"
+    gender: "nonbinary"
+    birth:
+      date: "1980"
+    aka: ["Samantha"]
+
+unions:
+  john_mary_1995:
+    partners: [john_smith_1970, mary_jones_1972]
+    type: marriage
+    start:
+      date: "1995-06-10"
+      place: "Springfield"
+    end:
+      date: "2002-03-20"
+      reason: "divorce"
+    notes: ["High school sweethearts."]
+    children:
+      - alex_smith_1998
+  john_sara_2003:
+    partners: [john_smith_1970, sara_lee_1975]
+    type: marriage
+    start:
+      date: "2003-09-21"
+    notes: ["Met at work."]
+    children:
+      - id: ben_smith_2005
+        relation: adopted
+        order: 1
+  sam_sara_2018:
+    partners: [sam_adopter_1980, sara_lee_1975]
+    type: partnership
+    start:
+      date: "2018-01-01"
+    notes: ["Co-parenting arrangement; no shared children."]
+    children: []
