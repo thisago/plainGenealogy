@@ -56,7 +56,9 @@ persons:
 
 unions:
   john_mary_1995:
-    partners: []
+    partners:
+      - john_smith_1970
+      - mary_jones_1972
     type: marriage
     start:
       date: "1995-06-10"
